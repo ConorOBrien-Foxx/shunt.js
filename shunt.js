@@ -68,12 +68,15 @@ class ShuntingYard {
             tokens[i] = pToken = token;
         }
         
+        let arities = [];
+        pToken = null;
         for(let token of tokens){
             if(this.isLiteral(token)){
                 outQueue.push(token);
             } else if(this.isFunction(token)){
                 opStack.push(token);
             } else if(this.isSeparator(token)){
+                arities[arities.length - 1]++;
                 while(topOp() !== this.opts.grouping.left){
                     if(opStack.length === 0){
                         throw new Error("unmatched grouping; expected a `" + this.opts.grouping.right + "`");
@@ -92,13 +95,15 @@ class ShuntingYard {
                 opStack.push(foundOp);
             } else if(token === this.opts.grouping.left){
                 opStack.push(token);
+                arities.push(0);
             } else if(token === this.opts.grouping.right){
-                let arity = 0;
+                let arity = arities.pop();
+                if(pToken !== this.opts.grouping.left)
+                    arity++;
                 while(topOp() !== this.opts.grouping.left){
                     if(opStack.length === 0)
                         throw new Error("unmatched grouping; expected a `" + this.opts.grouping.left + "`");
-                    if(topOp() === this.opts.grouping.separator)
-                        arity++;
+                    console.log(topOp());
                     outQueue.push(opStack.pop());
                 }
                 opStack.pop();  // remove left grouping
@@ -110,6 +115,7 @@ class ShuntingYard {
             } else {
                 throw new Error("unhandled token `" + token + "`");
             }
+            pToken = token;
         }
         while(opStack.length){
             // todo: handle paren mismatch
