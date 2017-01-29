@@ -103,7 +103,6 @@ class ShuntingYard {
                 while(topOp() !== this.opts.grouping.left){
                     if(opStack.length === 0)
                         throw new Error("unmatched grouping; expected a `" + this.opts.grouping.left + "`");
-                    console.log(topOp());
                     outQueue.push(opStack.pop());
                 }
                 opStack.pop();  // remove left grouping
