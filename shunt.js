@@ -106,7 +106,7 @@ class ShuntingYard {
                     outQueue.push(opStack.pop());
                 }
                 opStack.pop();  // remove left grouping
-                if(this.isFunction(topOp())){
+                if(topOp() && this.isFunction(topOp())){
                     if(this.opts.includeFunctionArity)
                         outQueue.push(arity);
                     outQueue.push(opStack.pop());
