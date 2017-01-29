@@ -1,0 +1,28 @@
+{
+  "name": "shunt.js",
+  "version": "1.0.2",
+  "description": "An extensible shunting yard algorithm implemented in JavaScript",
+  "main": "shunt.js",
+  "scripts": {
+    "test": "echo All is fine..."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConorOBrien-Foxx/shunt.js.git"
+  },
+  "keywords": [
+    "shunt",
+    "shunting",
+    "yard",
+    "algorithm",
+    "implement",
+    "implementation",
+    "extensible"
+  ],
+  "author": "conor-obrien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ConorOBrien-Foxx/shunt.js/issues"
+  },
+  "homepage": "https://github.com/ConorOBrien-Foxx/shunt.js#readme"
+}
