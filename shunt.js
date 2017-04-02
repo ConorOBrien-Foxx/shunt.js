@@ -18,6 +18,10 @@ class ShuntingOperator {
     toString(){
         return `[Op ${this.name} ${this.arity ? this.arity : "<unset>"}]`;
     }
+    
+    inspect(){
+        return this.toString();
+    }
 }
 
 class ShuntingYard {
@@ -54,7 +58,9 @@ class ShuntingYard {
             let token = tokens[i];
             if(this.system.has(token)){
                 token = this.system.get(token).clone();
-                if(!pToken || pToken instanceof ShuntingOperator){
+                if(!pToken || pToken instanceof ShuntingOperator
+                           || pToken === this.opts.grouping.left
+                           || pToken === this.opts.grouping.separator){
                     token.arity = 1;
                     token.precedence = this.opts.unaryPrec;
                     token.associativity = "right";
